@@ -11,7 +11,6 @@
     "nginx.start": "/usr/sbin/nginx",
     "nginx.reload": "/usr/sbin/nginx -s reload",
     "watch-client": "webpack -w --progress --colors"
-    // "test": "karma start"
   },
   "dependencies": {
     "async": "^1.5.2",
