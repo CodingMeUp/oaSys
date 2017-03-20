@@ -1,0 +1,51 @@
+.admin-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #222d32;
+  .admin-page-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 5px 0 5px;
+    z-index: 99;
+    h1 {
+      margin: 0;
+    }
+    background-color: #fff;
+    .admin-page-header-title{
+      height:30px;
+      font-size:20px;
+      padding-bottom:5px;
+      border-bottom: 1px solid #eee;
+    }
+     .ant-breadcrumb {
+      float: right;
+      margin-top: -22px;
+      margin-right: 10px;
+      span{
+       font-size:15px; 
+      }
+    }
+
+  }
+
+  .admin-page-content {
+    z-index: 888;
+    height: 100%;
+    width: 100%;
+    padding-top: 30px;
+    overflow: auto;
+    background-color: #fff;
+    .admin-page-content-inner {
+      min-width: 768px;
+      padding: 5px;
+      .ant-spin-nested-loading .ant-spin{
+        top:100px;
+      }
+    }
+  }
+}

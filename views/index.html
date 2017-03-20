@@ -1,0 +1,197 @@
+<% include header.html %>
+<body class="smart-style-4  desktop-detected minified ">
+<!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"><img src="/assets/logo-white.png"/></span>
+        <!-- END LOGO PLACEHOLDER -->
+        <span id="activity" style="display: none;" class="activity-dropdown"><i class="fa fa-user"></i><b class="badge"> 21 </b></span>
+        <div id="" class="ajax-dropdown">
+            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                <label class="btn btn-default"><input type="radio" name="activity" id="ajax/notify/mail.pagelet"/> 消息14 </label>
+                <label class="btn btn-default"><input type="radio" name="activity" id="ajax/notify/notifications.pagelet"/> 提醒3 </label>
+                <label class="btn btn-default"><input type="radio" name="activity" id="ajax/notify/tasks.pagelet"/> 任务4 </label>
+                <label class="btn btn-default"><input type="radio" name="activity" id="ajax/notify/mail.pagelet"/> 消息14 </label>
+                <label class="btn btn-default"><input type="radio" name="activity" id="ajax/notify/notifications.pagelet"/> 提醒3 </label>
+            </div>
+            <div class="ajax-notifications custom-scroll">
+                <div class="alert alert-transparent">
+                    <h4>通过点击按钮来显示信息</h4>
+                    这个空白信息用于帮助你保护隐私, 你也可以直接在这里自动显示一些内容。
+                </div>
+                <i class="fa fa-lock fa-4x fa-border"></i>
+            </div>
+            <span> 最后更新时间： 12/12/2013 9:43AM <button type="button" data-loading-text="&lt;i class='fa fa-refresh fa-spin'&gt;&lt;/i&gt; 正在载入..." class="btn btn-xs btn-default pull-right"><i class="fa fa-refresh"></i></button></span>
+        </div>
+        <!-- END AJAX-DROPDOWN -->
+    </div>
+    <!-- projects dropdown -->
+    <div id="project-context" style="display: none;">
+        <span class="label">项目：</span>
+        <span id="project-selector" class="popover-trigger-element dropdown-toggle" data-toggle="dropdown">最近项目<i class="fa fa-angle-down"></i></span>
+        <ul class="dropdown-menu ">
+            <li><a href="javascript:void(0);"></a></li>
+            <li><a href="javascript:void(0);"></a></li>
+            <li><a href="javascript:void(0);"></a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:void(0);"><i class="fa fa-power-off"></i> 清除</a></li>
+        </ul>
+    </div>
+    <!-- end projects dropdown -->
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+            <span><a href="javascript:void(0);" title="折叠菜单"><i class="fa fa-reorder"></i></a></span>
+        </div>
+        <!-- end collapse menu -->
+        <!-- logout button -->
+        <div id="logout" class="btn-header transparent pull-right">
+            <span><a href="manage/logout" title="退出" data-logout-msg="您可以在退出后关闭浏览器进一步提高安全性"><i class="fa fa-sign-out"><span style="text-indent: 15px;font-size: 15px;font-family: 'Microsoft YaHei', 'Open Sans', Arial, Helvetica, Sans-Serif"> 退出</span></i></a></span>
+        </div>
+        <!-- end logout button -->
+        <!-- Top menu profile link : this shows only when top menu is active -->
+        <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+            <li class=""><a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"><img src="http://cs.101.com/v0.1/static/cscommon/avatar/<%= locals.userInfo.userid%>/<%= locals.userInfo.userid%>.jpg?size=480" alt="" class="online"/></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:void(0);" class="padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> 设置</a></li>
+                    <li class="divider"></li>
+                    <li><i href="javascript:void(0);" class="padding-top-0 padding-bottom-0" data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i></i></a></li>
+                    <li class="divider"></li>
+                    <li><a href="manage/logout" class="padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- search mobile button (this is hidden till mobile view port) -->
+        <div id="search-mobile" class="btn-header transparent pull-right" style="display: none;">
+            <span><a href="javascript:;" title="搜索"><i class="fa fa-search"></i></a></span>
+        </div>
+        <!-- end search mobile button -->
+        <!-- input: search field -->
+        <form action="#ajax/search" class="header-search pull-right" style="display: none;">
+            <input type="text" name="param" placeholder="查找" id="search-fld"/>
+            <button type="button"><i class="fa fa-search"></i></button>
+            <a href="javascript:;" id="cancel-search-js" title="取消搜索"><i class="fa fa-times"></i></a>
+        </form>
+        <!-- end input: search field -->
+
+        <!-- fullscreen button -->
+        <div id="fullscreen" class="btn-header transparent pull-right">
+            <span><a href="javascript:void(0);" onclick="launchFullscreen(document.documentElement);" title="全屏"><i class="fa fa-fullscreen"><span style="text-indent: 15px;font-size: 15px;font-family: 'Microsoft YaHei', 'Open Sans', Arial, Helvetica, Sans-Serif"> 全屏</span></i></a></span>
+        </div>
+        <!-- end fullscreen button -->
+        <div id="userBook" class="btn-header transparent pull-right" style="margin-right:10px;">
+            <span><a href="javascript:void(0);" title="帮助"><i class="fa fa-question-circle"><span style="text-indent: 15px;font-size: 15px;font-family: 'Microsoft YaHei', 'Open Sans', Arial, Helvetica, Sans-Serif"> 帮助</span></i></a></span>
+        </div>
+
+        <!-- multiple lang dropdown : find all flags in the image folder -->
+        <ul class="header-dropdown-list hidden-xs ">
+            <li class="" style="display: none;"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/us.png"/><span> US </span><i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li class="active"><a href="javascript:void(0);"><img alt="" src="/assets/us.png"/> US</a></li>
+                    <li class=""><a href="javascript:void(0);"><img alt="" src="/assets/es.png"/> Spanish</a></li>
+                    <li class=""><a href="javascript:void(0);"><img alt="" src="/assets/de.png"/> German</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- end multiple lang -->
+    </div>
+    <!-- end pulled right: nav area -->
+</header>
+<!-- END HEADER -->
+<!-- Left panel : Navigation area -->
+<aside id="left-panel">
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            <a href="javascript:void(0);" id="show-shortcut-none" role="button" data-toggle="popover" data-container="body"  data-placement="right" data-trigger="hover">
+                <img src="http://cs.101.com/v0.1/static/cscommon/avatar/<%= locals.userInfo.userid%>/<%= locals.userInfo.userid%>.jpg?size=480" alt="me" class="online"/>
+                <span> <%= locals.userInfo.name%> </span><i class="fa fa-angle-down"></i>
+            </a>
+            <div id="popover-head" class="hide">员工信息 </div>
+            <div id="popover-content" class="hide">
+                        <form>
+                            工号：<%= locals.userInfo.userid%>
+                            <Br/>
+                            姓名：<%= locals.userInfo.name%>
+                            <% %>
+                        </form>
+            </div>
+        </span>
+    </div>
+    <nav>
+       <ul>
+            <li class="active"><a id='manage_dashboard' href="#manage/dashboard" title="首页"><i class="fa fa-lg fa-fw fa-home"></i><span class="menu-item-parent">首页</span></a></li>
+            <li><a id='manage_case' href="#manage/case" title="用例管理"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i><span class="menu-item-parent">用例管理</span></a> </li>
+            <!--<li><a id='manage_project' href="#manage/project" title="项目管理"><i class="fa fa-lg fa-fw fa-th-large"></i><span class="menu-item-parent">项目管理</span></a></li>-->
+            <li><a  href="#" title="项目管理"><i class="fa fa-lg fa-fw fa-th-large"></i><span class="menu-item-parent">项目管理</span></a>
+                <ul>
+                    <li><a  id='manage_project' href="#manage/project" title="项目管理"><i class="fa fa-lg fa-fw fa-lock"></i><span class="menu-item-parent">&nbsp项目管理</span></a></li>
+                    <li><a id='manage_setProject' href="#manage/setProject" title="新建项目"><i class="fa fa-lg fa-fw fa-key"></i><span class="menu-item-parent">&nbsp新建项目</span></a></li>
+                </ul>
+            </li>
+            <li><a id='manage_user_group'  href="#manage/user/group" title="用户权限设置"><i class="fa fa-lg fa-fw fa-lock"></i><span class="menu-item-parent">用户权限设置</span></a></li>
+            <li><a  href="#" title="系统设置"><i class="fa fa-lg fa-fw fa-cogs"></i><span class="menu-item-parent">系统设置</span></a>
+                <ul>
+                    <li><a  id='manage_user_role' href="#manage/user/role" title="角色组设置"><i class="fa fa-lg fa-fw fa-lock"></i><span class="menu-item-parent">&nbsp角色组设置</span></a></li>
+                    <li><a id='manage_user_operate' href="#manage/user/operate" title="操作组设置"><i class="fa fa-lg fa-fw fa-key"></i><span class="menu-item-parent">&nbsp操作组设置</span></a></li>
+                </ul>
+            </li>
+           <li><a href="#" title="数据统计"><i class= "fa fa-lg fa-fw  fa-bar-chart-o"></i><span class="menu-item-parent">数据统计</span></a>
+                <ul>
+                    <li><a id='manage_report_projectReport' href="#manage/report/projectReport" title="项目用例报表"><i class="fa fa-lg fa-fw fa-cube"></i><span class="menu-item-parent">&nbsp项目用例报表</span></a></li>
+                    <!-- <li><a id='manage_report_editorReport'  href="#manage/report/editorReport" title="编写人用例报表"><i class="fa fa-lg fa-fw fa-cube"></i><span class="menu-item-parent">&nbsp编写人用例报表</span></a></li> -->
+                </ul>
+        </ul>
+    </nav>
+    <span class="minifyme" style="display:none"><i class="fa fa-arrow-circle-left hit"></i></span>
+</aside>
+<!-- END NAVIGATION -->
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+    <!-- RIBBON -->
+    <div id="ribbon" style="display:none;">
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <!-- This is auto generated -->
+        </ol>
+        <!-- end breadcrumb -->
+    </div>
+    <!-- END RIBBON -->
+    <!-- MAIN CONTENT -->
+    <div id="content">
+    </div>
+    <!-- END MAIN CONTENT -->
+</div>
+<!-- END MAIN PANEL -->
+<!-- #PAGE FOOTER -->
+<div class="page-footer" style="display:none">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <span class="txt-color-white"><%= locals.title%> &copy; 2015-2016</span>
+        </div>
+        <div class="col-xs-6 col-sm-6 text-right hidden-xs">
+            <div class="txt-color-white inline-block">
+                <i class="txt-color-blueLight hidden-mobile">最后活动于：<i class="fa fa-clock-o"></i><strong>52分之前 &nbsp;</strong></i>
+                <div class="btn-group dropup" style="display: none;">
+                    <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown"><i class="fa fa-link"></i><span class="caret"></span></button>
+                </div>
+                <!-- end btn-group-->
+            </div>
+            <!-- end div-->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+</div>
+<!-- END FOOTER -->
+
+<div id="shortcut">
+    <ul>
+        <li><a href="#ajax/inbox.pagelet" class="jarvismetro-tile big-cubes bg-color-blue"><span class="iconbox"><i class="fa fa-envelope fa-4x"></i><span>消息 <span class="label pull-right bg-color-darken">14</span></span></span></a></li>
+        <li><a href="#ajax/calendar.pagelet" class="jarvismetro-tile big-cubes bg-color-orangeDark"><span class="iconbox"><i class="fa fa-calendar fa-4x"></i><span>日历 </span></span></a></li>
+        <li><a href="#ajax/profile.pagelet" class="jarvismetro-tile big-cubes bg-color-pinkDark selected"><span class="iconbox"><i class="fa fa-user fa-4x"></i><span>个人中心 </span></span></a></li>
+    </ul>
+</div>
+<% include footer.html %>

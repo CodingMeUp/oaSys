@@ -1,0 +1,23 @@
+{
+	"apps" : [
+        {
+            "name"        : "casemanage_test",
+            "instances"   : 4, //新增测试，开启4个进程
+            "script"      : "./bin/www",
+            //"source_map_support": true,   $ pm2 start app.js --source-map-support
+            "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+            "out_file"   : "/home/casemanage_test/logs/pm2-out.log",
+            "error_file" : "/home/casemanage_test/logs/pm2-err.log",
+            "merge_logs" : true,
+            "pid_file"   : "/home/casemanage_test/logs/casemanage.pid",
+            "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
+            "exec_mode"  : "cluster_mode", //cluster_mode ||fork_mode
+            "cron_restart" : "0 0 1 * *", // restart at 1 a.m. every day
+            "max_memory_restart" : "150M",
+            "watch" : false,
+            "env": {
+              "NODE_ENV": "test"
+            }
+        }
+    ]
+}
