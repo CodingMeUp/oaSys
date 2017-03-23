@@ -116,7 +116,7 @@ export default {
      for (let p in BUG_LANG.discoveryPhaseList) {
       discoveryPhaseOptions.push(<Option value={parseInt(p) } key={`stage_${p}`}>{BUG_LANG.discoveryPhaseList[p]}</Option>);
     }
-    //2017.1.25 cyn 发现阶段 漏测修改 相关产品 用例
+    //2017.1.25 cyn 发现阶段 漏测修改 相关产品 OA
     //end
     let stageOptions = [];
     for (let p in BUG_LANG.stageList) {

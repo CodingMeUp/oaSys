@@ -1,7 +1,6 @@
-import './style.css';
+﻿import './style.css';
 import React from 'react';
-import { Breadcrumb } from 'antd'
-import Page from '../../framework/page/Page';
+import { Breadcrumb,Icon} from 'antd'
 
 let initRequestMixin = {
   getInitialState() {
@@ -26,7 +25,7 @@ const Home = React.createClass({
   render() {
     const pageHeader =
       <div>
-        <h1 className="admin-page-header-title">用例管理平台</h1>
+        <h1 className="admin-page-header-title">OA管理平台</h1>
         <Breadcrumb>
           <Breadcrumb.Item>
             <Icon type="home" />
@@ -35,13 +34,11 @@ const Home = React.createClass({
           <Breadcrumb.Item>面板</Breadcrumb.Item>
         </Breadcrumb>
       </div>;
-      
+
     return (
-      <Page header={pageHeader} loading={this.state.loading}>
         <div>
-          
+				123
         </div>
-      </Page>
     );
   }
 });

@@ -6,14 +6,13 @@
   md5Crypto = require('crypto-js/md5'),
   rp = require('request-promise');
 
-
 /**
  * @routePrefix('/client')
  */
 module.exports = BugController = {
   /**
    * 根据ID 获取 BUG信息
-   * @route('getBugInfoById', 'GET')
+   * @route('ac', 'GET')
    * @param req
    * @param res
    * @constructor

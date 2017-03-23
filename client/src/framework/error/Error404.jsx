@@ -4,7 +4,7 @@ import { Breadcrumb, Button, Alert } from 'antd'
 import {Link} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 const browserHistory = createBrowserHistory();
-import Page from '../page/Page';
+
 
 export default React.createClass({
   goBack() {
@@ -20,7 +20,7 @@ export default React.createClass({
         </Breadcrumb>
       </div>;
     return (
-      <Page header={header}>
+      <div header={header}>
         <div id="admin-page-header" className="admin-page-header">
 
         </div>
@@ -31,7 +31,7 @@ export default React.createClass({
           showIcon />
         <Button onClick={this.goBack}><a href="javascript:;">返回上一级</a></Button>
         <Button> <Link to="/">返回首页</Link></Button>
-      </Page>
+      </div>
     );
   }
 });
