@@ -7,8 +7,7 @@ import PubSubMsg from '../framework/common/pubsubmsg';
 
 let routes = [
   { path: '/bug', component: Bug },
-];
-
+]
 
 routes.forEach(item => {
   item.onEnter = function(nextState, replace) {

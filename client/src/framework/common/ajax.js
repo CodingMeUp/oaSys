@@ -20,7 +20,7 @@ export default {
       },
       error(error) {
         console.error(error);
-        message.error("Request to make a mistake, please try again !");
+        message.error("请求有错误，请重试！");
       },
       success(res) {
         console.log(res);
