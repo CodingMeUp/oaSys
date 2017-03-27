@@ -1,4 +1,23 @@
-@import '../../framework/style/custom.less';
+@import "~antd/lib/style/themes/default.less";
+
+@icon-url: "/iconfont/iconfont"; // 把 iconfont 地址改到本地
+
+@primary-color: #2db7f5;
+@primary-color-light: #B196EE;
+@link-color             : #2db7f5;
+@link-hover-color       : tint(@link-color, 20%);
+@link-active-color      : shade(@link-color, 5%);
+@link-hover-decoration  : none;
+
+@bg-color: #333;
+@bg-color-light: #ECECEC;
+@nav-bg-color: fade(@bg-color, 75%);
+
+@text-color: #666;
+@text-title-color: #BCBCBC;
+@text-color-light: #FFF;
+
+
 @login-prefix-cls: login;
 .@{login-prefix-cls}
 {
@@ -7,17 +26,11 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background:url('./img/bg_src.jpg') no-repeat ;
-    header,
-    footer {
-        //height: 60px;
-        //background: #eee
-    }
+    background:url('./img/bg.jpg') no-repeat ;
 
     &-header {
         height: 64px;
         background: @nav-bg-color;
-        //position: fixed;
         width: 100%;
         z-index: 970;
         box-shadow: 0 5px 8px fade(#000, 15);
@@ -54,15 +67,16 @@
     }
 
     &-footer {
-        background: @bg-color;
         height: 80px;
         text-align: center;
         line-height: 60px;
+        &-p{
+          color:hsl(318,24%,79%)
+        }
     }
 
     &-banner {
         flex:1;
-
         &-bg {
             background-size: cover;
             background-position: center;
@@ -75,21 +89,14 @@
         & .ant-carousel {
             height: 100%;
         }
-
     }
 
-    main {
-        display: flex;
-        flex: 1;
-    }
-
-    &-left {
-        flex: 1
-    }
 
     &-main {
-        width: 50em;
+        // width: 50em;
+        margin: 250px auto;
         display: flex;
+        text-align: center;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -107,84 +114,11 @@
         padding-bottom: 20px;
     }
 
+
+
     &-main-tabs {
         width: 30em;
-        //height: 30em;
     }
 
-    &-main-tabs-form {
-        //height: 15em;
-        flex-direction: column;
-        display: flex;
-        justify-content: flex-start;
-    }
 
-    &-main-tabs-form-item {
-        flex-direction: row;
-        display: flex;
-        margin: 16px;
-    }
-
-    &-main-tabs-form > .ant-form-item {
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-bottom: 20px;
-    }
-
-    &-main-tabs-form > .ant-form-item > label {
-        float: left;
-        width: 50px;
-        //margin-right:5px;
-    }
-
-    &-main-tabs-form > .ant-form-item > div {
-        flex: 1
-    }
-
-    &-main-tabs-form > .ant-form-item .z-input {
-        height: 36px;
-    }
-
-    &-main-tabs-form > .ant-form-item .z-password {
-        height: 36px;
-    }
-
-    &-main-tabs-form > .ant-form-item .z-input {
-        height: 36px;
-    }
-
-    &-main-tabs-form-btn {
-        margin-left: 20px;
-        margin-right: 20px;
-        height: 36px;
-    }
-
-    .z-formitem {
-        margin-right: 20px;
-        margin-bottom: 4px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        & > label {
-            margin-bottom: 0px;
-            margin-right: 4px;
-            width: 80px
-        }
-        & .has-error {
-            margin-left: 0px;
-        }
-        & .has-error.has-feedback:after {
-            position: relative;
-            margin-left: 0px;
-        }
-        & .ant-form-item-control {
-            display: flex;
-            flex-direction: row;
-        }
-        & .z-checkbox {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    }
 }

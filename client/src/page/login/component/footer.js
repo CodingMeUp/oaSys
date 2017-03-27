@@ -6,11 +6,11 @@ export default class LoginFooterComponent extends Component {
 
   render() {
   	let {prefixCls} = this.props,
-  		text = 'Copyright © 2016 The Project by <a href="#">company</a>. All Rights Reserved'
+  		text = 'Copyright © 2017 The Project by 天津晟新宇商贸有限公司. All Rights Reserved'
     return (
       <footer className={`${prefixCls}-footer`}>
           <div>
-          <p dangerouslySetInnerHTML={{ __html: text }}></p>
+          <p className={`${prefixCls}-footer-p`}> {text}</p>
         </div>
       </footer>
     )

@@ -2,14 +2,15 @@ import * as types from '../constant/actiontype';
 import _ from 'lodash';
 
 let initialState = {
-	tableLoading: false,
-	bugs: [],
+	username: '',
+	isCorrect: false,
+	message: ''
 };
 
 
 export default function (state = initialState, action = {}) {
 	switch (action.type) {
-		case types.FETCH_BUG_BY_ID:
+		case types.USER_LOGIN:
 			return _.assign({}, state, action);
 		default:
 			return state;

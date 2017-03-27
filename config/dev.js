@@ -3,7 +3,7 @@ var
   root = path.resolve(__dirname, '..'),
   envConfig = require('../env.config').dev.server,
   config = {
-    siteTitle: 'OA管理平台',
+    siteTitle: '库房管理系统平台',
     session: {
       name: 'nd.qa.session',
       secret: 'NjxEKC0%HOL&Ga1zLBTOC4!QrEtAv2e7',

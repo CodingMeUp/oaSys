@@ -5,19 +5,19 @@ module.exports = function(app, co) {
         cache = require('../utils/cacheMemory'),
         _ = require('lodash');
 
-    /**
-   * 测试 pms module product 获取,
-   */
-    app.route('/aaa').get(function(req, res, next) {
-        co(function * () {
-            try {
-              // res.json({})
-              res.redirect("/client.html");
-            } catch (e) {
-              res.redirect("/");
-            }
-        });
-    });
+  //   /**
+  //  * 测试 pms module product 获取,
+  //  */
+  //   app.route('/aaa').get(function(req, res, next) {
+  //       co(function * () {
+  //           try {
+  //             // res.json({})
+  //             res.redirect("/client.html");
+  //           } catch (e) {
+  //             res.redirect("/");
+  //           }
+  //       });
+  //   });
 
 
 

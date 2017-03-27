@@ -39,7 +39,7 @@ export default {
         request = Request.get(options.url).query(options.data);
         break;
       case 'POST':
-        options.data._xsrf = '';// from cookie or input element
+        // options.data._xsrf = '';// from cookie or input element
         request = Request.post(options.url);
         break;
       case 'PUT':

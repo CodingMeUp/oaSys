@@ -1,4 +1,3 @@
-import { createAction } from 'redux-actions';
 import _ from 'lodash';
 import * as types from '../constant/actiontype';
 import API from '../page/API';

@@ -2,19 +2,7 @@
 export const FETCH_BUG_LIST = 'FETCH_BUG_LIST'; // 获取 BUG list
 export const FETCH_BUG_BY_ID = 'FETCH_BUG_BY_ID'; // 获取 BUG 详情
 export const FETCH_BUG_PROJECT_LIST = 'FETCH_BUG_PROJECT_LIST'; // 获取 项目 列表
-export const FETCH_BUG_CREATE_DATA = 'FETCH_BUG_CREATE_DATA'; // 获取 BUG 创建数据
-export const FETCH_BUG_CREATE = 'FETCH_BUG_CREATE'; // BUG 创建
-export const FETCH_BUG_UPDATE = 'FETCH_BUG_UPDATE'; // BUG 编辑
 
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
-export const CLEAR_CREATE_UPDATE_INFO = 'CLEAR_CREATE_UPDATE_INFO';
 
-export const TABLE_LOADING = 'TABLE_LOADING';
-export const PAGE_LOADING = 'PAGE_LOADING';
 
-export const DO_BUG_VIEW_MODAL_VISIBLE = 'DO_BUG_VIEW_MODAL_VISIBLE';
-
-export const FETCH_BUG_ERROR = 'FETCH_BUG_ERROR';
-
-export const SHOW_OR_HIDE_SIDEBAR = 'SHOW_OR_HIDE_SIDEBAR';
-export const SHOW_OR_HIDE_SEARCH_BAR = 'SHOW_OR_HIDE_SEARCH_BAR';
+export const USER_LOGIN = 'USER_LOGIN'

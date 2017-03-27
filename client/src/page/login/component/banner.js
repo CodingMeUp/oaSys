@@ -10,7 +10,7 @@ export default class BannerComponent extends Component {
       <div className={`${prefixCls}-banner`}>
 
         <Carousel effect="fade">
-            <div className={`$${prefixCls}-banner-bg`}
+            <div className={`${prefixCls}-banner-bg`}
             style={{backgroundImage:'url(https://os.alipayobjects.com/rmsportal/IhCNTqPpLeTNnwr.jpg)'}}><h3>1</h3></div>
             <div><h3>2</h3></div>
             <div><h3>3</h3></div>
@@ -21,12 +21,3 @@ export default class BannerComponent extends Component {
     )
   }
 }
-/*
-     <Carousel effect="fade">
-            <div className={`$${prefixCls}-banner-bg`}
-            style={{backgroundImage:'url(https://os.alipayobjects.com/rmsportal/IhCNTqPpLeTNnwr.jpg)'}}><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-          </Carousel>
- */

@@ -25,7 +25,7 @@ const Home = React.createClass({
   render() {
     const pageHeader =
       <div>
-        <h1 className="admin-page-header-title">OA管理平台</h1>
+        <h1 className="admin-page-header-title">库房管理系统平台</h1>
         <Breadcrumb>
           <Breadcrumb.Item>
             <Icon type="home" />
