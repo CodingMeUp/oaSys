@@ -1,13 +1,13 @@
 import React from 'react';
 import Bug from './bug/BugsList';
-import Portal from './portal/index'
+// import Portal from './portal/index'
 import Storage from '../framework/common/storage';
 import Function from '../framework/common/functions';
 import PubSubMsg from '../framework/common/pubsubmsg';
 
 let routes = [
   { path: '/bug', component: Bug },
-  { path: '/portal', component: Portal },
+  // { path: '/portal', component: Portal },
 ]
 
 routes.forEach(item => {

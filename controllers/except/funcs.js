@@ -28,11 +28,21 @@ funcs = {
         return moment().format('YYYY-MM-DD HH:mm:ss')
     },
 
-    renderSuccessJson: function(res, message, data) {
-        res.json({status: 200, message: message, data: data, err: null});
+    renderSuccessJson: function(res, req,message, data) {
+        if(req.method == "OPTIONS"){
+            res.send(200);/*让options请求快速返回*/
+        }else{
+            res.status(200).json({message: message, data: data });
+        }
     },
-    renderErrorJson: function(res, message, err) {
-        res.json({status: 500, message: message, data: {}, err: err});
+    renderErrorJson: function(res,req, message,error) {
+        if(req.method == "OPTIONS"){
+            res.send(200);/*让options请求快速返回*/
+        }else{
+            res.status(400).json({message: message, error: error});
+            // res.json({status: 500, message: message, data: {}, error: error});
+        }
+
     },
     setUserSession: function(req, userid, name, _id, userRoles, personInfo, projects) {
         req.session.userInfo = {

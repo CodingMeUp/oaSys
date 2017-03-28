@@ -31,7 +31,7 @@ export  class LoginMainComponent extends Component {
 		const {login, loginAction, error, routeParams} = this.props;
 		if( login.type === 'USER_LOGIN' &&  !error ){
 				Message.success(login.message);
-				history.pushState('portal','KUCUN','www.baidu.com')
+				history.pushState('portal','KUCUN','#/portal')
 				return false;
 		}
 		if ( error) {

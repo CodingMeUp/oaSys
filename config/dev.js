@@ -16,7 +16,7 @@ var
       user_cookie_key: 'nd.qa.u'
     },
     db: { // 数据库配置
-      url:'mongodb://localhost:27017/casemanage',
+      url:'mongodb://localhost:27017/oa',
       opts: {
         user: '',
         pass: ''

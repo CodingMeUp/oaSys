@@ -32,7 +32,13 @@ app.route('/').get(function (req, res, next) {
         cache.put('client_md5', client_md5);
       }
     }
-
+    var auth = [];
+    auth.push({
+      oper_href: '/client/portal'
+    })
+    auth.push({
+      oper_href: '/client/login'
+    })
     // var auth = [];
     // if (req.session.userInfo.userRoles) {
     //   req.session.userInfo.userRoles.forEach(function (item) {

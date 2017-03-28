@@ -8,8 +8,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   passport = require('passport'),
   expressValidator = require('express-validator'),
-  controller = require('./utils/controller');
-
+  controller = require('./utils/controller'),
+  cors = require('cors');
 var app = express();
 
 /**
@@ -27,6 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 app.set('x-powered-by', false);
 app.set('trust proxy', true);
 
