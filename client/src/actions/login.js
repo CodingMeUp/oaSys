@@ -4,6 +4,16 @@ import * as types from '../constant/actiontype';
 import API from '../page/API';
 import Ajax from '../framework/common/ajax';
 
+
+export function clearErrors() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: types.CLEAR_ERRORS,
+      error: null
+    });
+  };
+}
+
 /**
  * 登录用户
  */
@@ -17,17 +27,15 @@ export function userLogin(postData) {
         if (result.status === 200) {
           let state = {
             type: types.USER_LOGIN,
-            isCorrect: true,
-            username: result.data.password,
+            username: result.data.username,
             message:result.message
           };
           dispatch(state);
         } else {
           dispatch({
-            type: types.USER_LOGIN,
-            isCorrect: false,
-            username: result.data.password,
-            message: result.message
+            type: types.FETCH_ERRORS,
+            username: result.data.username,
+            error: result.message
           });
         }
       }

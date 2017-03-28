@@ -33,8 +33,16 @@ app.route('/').get(function (req, res, next) {
       }
     }
 
-    var auth = [];
-
+    // var auth = [];
+    // if (req.session.userInfo.userRoles) {
+    //   req.session.userInfo.userRoles.forEach(function (item) {
+    //     if (item) {
+    //       auth.push({
+    //         oper_href: item.oper_href
+    //       })
+    //     }
+    //   });
+    // }
     res.render('client', {
       userId: 'req.session.userInfo._id',
       userName: 'req.session.userInfo.name',

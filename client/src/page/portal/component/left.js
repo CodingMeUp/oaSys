@@ -44,7 +44,7 @@ export default class PortalLeftComponent extends Component {
 
 			if(subMenus){
 				return (<SubMenu key={code} title={<span><span>{title}</span></span>} >
-					{::this.getSubMenus(subMenus)}
+					{this.getSubMenus(subMenus)}
 				</SubMenu>)
 			}
 			else {
@@ -68,7 +68,7 @@ export default class PortalLeftComponent extends Component {
 	      		theme='dark'
 	      		mode="inline"
 
-	      		onClick={::this.handleMenuClick}>
+	      		onClick={this.handleMenuClick}>
 	      		{subMenus}
 	      	</Menu>
 	      </div>

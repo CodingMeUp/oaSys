@@ -26,7 +26,7 @@ export default class PortalHeaderComponent extends Component {
       	 <div className={`${prefixCls}-header-nav`} >
 	        <Menu
 	        	mode="horizontal"
-	        	onClick={::this.handleMenuClick}>
+	        	onClick={this.handleMenuClick}>
 	          <Item key="a">{menu}</Item>
 	          <Item key="b">{menu}</Item>
 	          <Item key="c">{menu}</Item>

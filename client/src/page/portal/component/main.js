@@ -20,7 +20,7 @@ export default class PortalMainComponent extends Component {
 		return tabs.map((tab,index)=>{
 			return (
 				<TabPane key={tab.get('url')} tab={tab.get('title')}>
-					{::this.getPaneContent(tab)}
+					{this.getPaneContent(tab)}
 				</TabPane>
 			)
 		})
@@ -56,36 +56,12 @@ export default class PortalMainComponent extends Component {
   		return (
   			<div className={`${prefixCls}-main`}>
   				 <Tabs type='editable-card'
-  				 	onEdit={::this.handleEdit}
+  				 	onEdit={this.handleEdit}
   				 	activeKey={activeKey}
-  				 	onChange={::this.handleChange}>
+  				 	onChange={this.handleChange}>
   				 	{tabPanes}
   				 </Tabs>
   			</div>
   		)
   	}
 }
-
-/*
-//{tabPanes}
-
-render() {
-  	let {prefixCls} = this.props
-    return (
-      <div className={`${prefixCls}-main`}>
-          <Tabs type='editable-card'>
-   			<TabPane tab="选项卡" key="1">
-   				<iframe className="iframe" src="http://www.bings.com" />
-   			</TabPane>
-   			<TabPane tab="选项卡" key="2">
-   			<div className="iframe">fsdfwefwe</div>
-   			</TabPane>
-   			<TabPane tab="选项卡" key="3">
-   				<iframe className='iframe' src="http://www.baidu.com" />
-   			</TabPane>
-   			<TabPane tab="选项卡" key="4">选项卡一内容</TabPane>
-          </Tabs>
-      </div>
-    )
-  }
- */

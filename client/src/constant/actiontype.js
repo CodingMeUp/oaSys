@@ -6,3 +6,6 @@ export const FETCH_BUG_PROJECT_LIST = 'FETCH_BUG_PROJECT_LIST'; // 获取 项目
 
 
 export const USER_LOGIN = 'USER_LOGIN'
+//error 统一错误处理
+export const FETCH_ERRORS = 'FETCH_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'

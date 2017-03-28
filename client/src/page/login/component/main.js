@@ -1,7 +1,7 @@
 // React Component
 import React,{ Component,PropTypes } from 'react'
 import { bindActionCreators } from 'redux';
-import { browserHistory, Router, Route, Link } from 'react-router';
+import {  Router, Route, Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as LoginAction from '../../../actions/login';
 import { Input,Tabs, Button, Message, Icon,Form,Checkbox} from 'antd'
@@ -17,17 +17,33 @@ export  class LoginMainComponent extends Component {
 				loginAction.userLogin(values);
       }
     });
-		console.log(this.props)
-		if( login.type === 'USER_LOGIN' && !login.isCorrect ){
-			Message.error(login.message)
-		}else if (login.type === 'USER_LOGIN' && login.isCorrect ) {
-			Message.info(login.message)
-			location.href = 'www.baidu.com'
-		}
+		// const { login } = this.props
+		// console.log(login)
+		// if( login.type === 'USER_LOGIN' && !login.isCorrect ){
+		// 	Message.error(login.message)
+		// }else if (login.type === 'USER_LOGIN' && login.isCorrect ) {
+		// 	Message.info(login.message)
+		// 	location.href = 'www.baidu.com'
+		// }
   }
+
+	componentDidUpdate() {
+		const {login, loginAction, error, routeParams} = this.props;
+		if( login.type === 'USER_LOGIN' &&  !error ){
+				Message.success(login.message);
+				history.pushState('portal','KUCUN','www.baidu.com')
+				return false;
+		}
+		if ( error) {
+			Message.error(this.props.error);
+			loginAction.clearErrors();
+			return false;
+		}
+}
+
   	render() {
 
-  		let {prefixCls, ...props} = this.props
+  		let {prefixCls,...props} = this.props
 			const { getFieldDecorator } = this.props.form
     	return (
     	   <div className={`${prefixCls}-main`}>
@@ -64,7 +80,8 @@ export  class LoginMainComponent extends Component {
 }
 const LoginForm = Form.create()(LoginMainComponent);
 export default connect((state, props) => ({
-			login: state.login
+			login: state.login,
+			error: state.login.error
 }), dispatch => ({
   loginAction: bindActionCreators(LoginAction, dispatch)
 }))(LoginForm);
