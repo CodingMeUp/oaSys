@@ -9,7 +9,7 @@ var co = require('co'),
 /**
  * @routePrefix('/user/')
  */
-module.exports = HomeController = {
+module.exports = UserController = {
   /**
    * 登录表单
    * @route('login', 'POST')
