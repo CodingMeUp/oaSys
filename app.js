@@ -50,7 +50,6 @@ app.use(expressValidator({
   }
 }));
 
-
 require(path.join(C.dir.model, C.exceptFolder)); // model初始化入口
 require(path.join(C.dir.controller, C.exceptFolder))(app); // router初始化入口
 
