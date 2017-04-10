@@ -71,7 +71,7 @@ module.exports = UserController = {
         condition['$and'] = [{ '$or': [{ 'user_name': new RegExp($filter, "i") }, { 'user_id': $filter }] }];
       }
       var count = yield M.user.count(condition);
-      var items =  yield M.user.find(condition,'-password -_id', {limit: +$limit,skip: +$offset})
+      var items =  yield M.user.find(condition,'-_id', {limit: +$limit,skip: +$offset})
       var newItems  = []
       if(items && items.length >= 0){
         for(var item of items){
@@ -106,13 +106,17 @@ module.exports = UserController = {
     co(function* () {
     var body = req.body;
     if(body){
-        var isHaveUser = yield M.find.findOne({
+        var isHaveUser = yield M.user.findOne({
           user_id: body.user_id
         })
         if(isHaveUser){
-            F.renderErrorJson( res, req, "已存在相同ID" + body.user_id);
+            F.renderErrorJson( res, req, "已存在相同ID: " + body.user_id);
         }else{
            var resBody = yield M.user.create(body)
+           yield M.user_role.create({
+              role_id: body.role_id,
+              user_id: body.user_id
+           })
            F.renderSuccessJson( res, req, "操作成功",resBody);
         }
     }
@@ -128,16 +132,20 @@ module.exports = UserController = {
    */
    USER_DELETE: function (req, res) {
      co(function* () {
+
      var body = req.body;
      if(body){
-         var isHaveUser = yield M.find.findOne({
+         var isHaveUser = yield M.user.findOne({
            user_id: body.user_id
          })
          if(isHaveUser){
            var resBody = yield M.user.remove({ user_id:isHaveUser.user_id});
+           yield M.user_role.remove({
+              user_id:isHaveUser.user_id
+           })
            F.renderSuccessJson( res, req, "操作成功",resBody);
          }else{
-            F.renderErrorJson( res, req, "操作成功",'ID' +body.user_id+'用户不存在' );
+            F.renderErrorJson( res, req, "操作失败" + 'ID' +body.user_id+'用户不存在','ID' +body.user_id+'用户不存在' );
          }
      }
 
@@ -155,14 +163,16 @@ module.exports = UserController = {
      co(function* () {
      var body = req.body;
      if(body){
-         var isHaveUser = yield M.find.findOne({
+         var isHaveUser = yield M.user.findOne({
            user_id: body.user_id
          })
          if(isHaveUser){
             var resBody = yield M.user.update({ user_id:isHaveUser.user_id},body,{multi:false});
+            yield M.user_role.update({ user_id:isHaveUser.user_id},{
+              role_id: body.role_id, user_id: body.user_id},{multi:false});
             F.renderSuccessJson( res, req, "操作成功",resBody);
          }else{
-            F.renderErrorJson( res, req, "操作成功",'ID' +body.user_id+'用户不存在' );
+            F.renderErrorJson( res, req, "操作失败" +  'ID' +body.user_id+'用户不存在','ID' +body.user_id+'用户不存在' );
          }
      }
 
