@@ -8,18 +8,18 @@ var co = require('co'),
 
 
 /**
- * @routePrefix('/apply/')
+ * @routePrefix('/house/')
  */
-module.exports = ApplyController = {
+module.exports = HouseController = {
 
   /**
-   * 供应商列表
+   * 仓库列表
    * @route('list', 'GET')
    * @param req
    * @param res
    * @constructor
    */
-  APPLY_LIST: function (req, res) {
+  HOUSE_LIST: function (req, res) {
     co(function* () {
       var $count  = req.query.$count || true
       var $offset = req.query.$offset || 0;
@@ -27,17 +27,17 @@ module.exports = ApplyController = {
       var $filter = req.query.$filter || '';
       var condition = {}
       if($filter){
-        condition['$and'] = [{ '$or': [{ 'apply_name': new RegExp($filter, "i") }, { 'apply_id': $filter }] }];
+        condition['$and'] = [{ '$or': [{ 'house_name': new RegExp($filter, "i") }, { 'house_id': $filter }] }];
       }
-      var count = yield M.apply.count(condition);
-      var items =  yield M.apply.find(condition,'-_id', {limit: +$limit,skip: +$offset})
+      var count = yield M.house.count(condition);
+      var items =  yield M.house.find(condition,'-_id', {limit: +$limit,skip: +$offset})
       var newItems  = []
       if(items && items.length >= 0){
         for(var item of items){
-                  // var applyRole = yield M.apply.findOne({
-                  //         apply_id: item.apply_id
+                  // var houseRole = yield M.house.findOne({
+                  //         house_id: item.house_id
                   //    })
-                  // item._doc['apply'] = applyRole.role_id
+                  // item._doc['house'] = houseRole.role_id
                   newItems.push(item)
           }
       }
@@ -53,23 +53,23 @@ module.exports = ApplyController = {
     }).catch(F.handleErr.bind(null, res))
   },
   /**
-   * 供应商ADD操作
+   * 仓库ADD操作
    * @route('opt', 'POST')
    * @param req
    * @param res
    * @constructor
    */
-  APPLY_ADD: function (req, res) {
+  HOUSE_ADD: function (req, res) {
     co(function* () {
     var body = req.body;
     if(body){
-        var isHaveApply = yield M.apply.findOne({
-          '$or': [{ apply_id: body.apply_id}, {apply_name: body.apply_name}]
+        var isHaveHouse = yield M.house.findOne({
+          '$or': [{ house_id: body.house_id}, {house_name: body.house_name}]
         })
-        if(isHaveApply){
-            F.renderErrorJson( res, req, "已存在相同ID【" + body.apply_id + "】或名称【" + body.apply_name + "】");
+        if(isHaveHouse){
+            F.renderErrorJson( res, req, "已存在相同ID【" + body.house_id + "】或名称【" + body.house_name + "】");
         }else{
-           var resBody = yield M.apply.create(body)
+           var resBody = yield M.house.create(body)
            F.renderSuccessJson( res, req, "操作成功",resBody);
         }
     }
@@ -77,24 +77,24 @@ module.exports = ApplyController = {
     }).catch(F.handleErr.bind(null, res))
   },
   /**
-   * 供应商 删除操作
+   * 仓库 删除操作
    * @route('opt', 'DELETE')
    * @param req
    * @param res
    * @constructor
    */
-   APPLY_DELETE: function (req, res) {
+   HOUSE_DELETE: function (req, res) {
      co(function* () {
      var body = req.body;
      if(body){
-         var isHaveApply = yield M.apply.findOne({
-           apply_id: body.apply_id
+         var isHaveHouse = yield M.house.findOne({
+           house_id: body.house_id
          })
-         if(isHaveApply){
-           var resBody = yield M.apply.remove({ apply_id:isHaveApply.apply_id});
+         if(isHaveHouse){
+           var resBody = yield M.house.remove({ house_id:isHaveHouse.house_id});
            F.renderSuccessJson( res, req, "操作成功",resBody);
          }else{
-            F.renderErrorJson( res, req, "操作失败" + 'ID' +body.apply_id+'供应商不存在','ID' +body.apply_id+'供应商不存在' );
+            F.renderErrorJson( res, req, "操作失败" + 'ID' +body.house_id+'仓库不存在','ID' +body.house_id+'仓库不存在' );
          }
      }
 
@@ -102,31 +102,31 @@ module.exports = ApplyController = {
    },
 
   /**
-   * 供应商修改操作
+   * 仓库修改操作
    * @route('opt', 'PUT')
    * @param req
    * @param res
    * @constructor
    */
-   APPLY_UPDATE: function (req, res) {
+   HOUSE_UPDATE: function (req, res) {
      co(function* () {
      var body = req.body;
      if(body){
-         var isHaveApply = yield M.apply.findOne({
-           apply_id: body.apply_id
+         var isHaveHouse = yield M.house.findOne({
+           house_id: body.house_id
          })
-         if(isHaveApply){
-            var sameName = yield M.apply.findOne({
-                 apply_name: body.apply_name
+         if(isHaveHouse){
+              var sameName = yield M.house.findOne({
+                 house_name: body.house_name
               })
               if(sameName){
-                  F.renderErrorJson( res, req, "已存在相同名称【" + body.apply_name + "】");
+                  F.renderErrorJson( res, req, "已存在相同名称【" + body.house_name + "】");
               }else{
-                var resBody = yield M.apply.update({ apply_id:isHaveApply.apply_id},body,{multi:false});
+                var resBody = yield M.house.update({ house_id:isHaveHouse.house_id},body,{multi:false});
                 F.renderSuccessJson( res, req, "操作成功",resBody);
               }
          }else{
-            F.renderErrorJson( res, req, "操作失败" +  'ID' +body.apply_id+'供应商不存在','ID' +body.apply_id+'供应商不存在' );
+            F.renderErrorJson( res, req, "操作失败" +  'ID' +body.house_id+'仓库不存在','ID' +body.house_id+'仓库不存在' );
          }
      }
 
@@ -141,16 +141,16 @@ module.exports = ApplyController = {
   //  * @param res
   //  * @constructor
   //  */
-  // APPLY_TESTADD: function (req, res) {
+  // HOUSE_TESTADD: function (req, res) {
   //   co(function* () {
   //     for (var i = 0; i < 1000; i++) {
-  //       var applyInfo = yield M.apply.create({
-  //         apply_id: i + '',
-  //         apply_name:  '测试名字' + i,
+  //       var houseInfo = yield M.house.create({
+  //         house_id: i + '',
+  //         house_name:  '测试名字' + i,
   //       })
   //    }
   //
-  //     F.renderErrorJson( res, req, "登录失败！请确认供应商名和密码");
+  //     F.renderErrorJson( res, req, "登录失败！请确认仓库名和密码");
   //   }).catch(F.handleErr.bind(null, res))
   // },
 };

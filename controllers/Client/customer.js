@@ -64,10 +64,10 @@ module.exports = CustomerController = {
     var body = req.body;
     if(body){
         var isHaveCustomer = yield M.customer.findOne({
-          customer_id: body.customer_id
+          '$or': [{ customer_id: body.customer_id}, {customer_name: body.customer_name}]
         })
         if(isHaveCustomer){
-            F.renderErrorJson( res, req, "已存在相同ID: " + body.customer_id);
+            F.renderErrorJson( res, req, "已存在相同ID【" + body.customer_id + "】或名称【" + body.customer_name + "】");
         }else{
            var resBody = yield M.customer.create(body)
            F.renderSuccessJson( res, req, "操作成功",resBody);
@@ -116,8 +116,15 @@ module.exports = CustomerController = {
            customer_id: body.customer_id
          })
          if(isHaveCustomer){
-            var resBody = yield M.customer.update({ customer_id:isHaveCustomer.customer_id},body,{multi:false});
-            F.renderSuccessJson( res, req, "操作成功",resBody);
+              var sameName = yield M.customer.findOne({
+                 customer_name: body.customer_name
+              })
+              if(sameName){
+                  F.renderErrorJson( res, req, "已存在相同名称【" + body.customer_name + "】");
+              }else{
+                var resBody = yield M.customer.update({ customer_id:isHaveCustomer.customer_id},body,{multi:false});
+                F.renderSuccessJson( res, req, "操作成功",resBody);
+              }
          }else{
             F.renderErrorJson( res, req, "操作失败" +  'ID' +body.customer_id+'客户不存在','ID' +body.customer_id+'客户不存在' );
          }
