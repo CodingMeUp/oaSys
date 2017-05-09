@@ -20,11 +20,11 @@ var PutoutSchema = new Schema({
         'default': ''
     },
    putout_num: {   // 数量
-        type: String,
+        type: Number,
         'default': ''
     },
    putout_price: {  //单价
-        type: String,
+        type: Number,
         'default': ''
     },
    putout_desc: {  // 描述

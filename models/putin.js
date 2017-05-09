@@ -20,11 +20,11 @@ var PutinSchema = new Schema({
         'default': ''
     },
    putin_num: {   // 数量
-        type: String,
+        type: Number,
         'default': ''
     },
    putin_price: {  //单价
-        type: String,
+        type: Number,
         'default': ''
     },
    putin_desc: {  // 描述

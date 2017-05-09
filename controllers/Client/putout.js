@@ -143,9 +143,9 @@ module.exports = PutoutController = {
           "putout_price" : "11",
           "putout_num" : "3",
           "putout_goods_unit" : "个",
-          "putout_goods_spec" : "1*16",
-          "putout_goods_id" : "123",
-          "putout_goods_name" : "巧克力"
+          "putout_goods_spec" : "16*16",
+          "putout_goods_id" : "1",
+          "putout_goods_name" : "芒果"
         })
      }
       F.renderErrorJson( res, req, "登录失败！请确认出库名和密码");

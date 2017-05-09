@@ -64,6 +64,24 @@ module.exports = PutinController = {
     var body = req.body;
     if(body){
            var resBody = yield M.putin.create(body)
+          //  var isHaveRemain = yield M.remain.findOne({
+          //   goods_id: body.putin_goods_id,
+          //   goods_name: body.putin_goods_name,
+          //   goods_spec: body.putin_goods_spec
+          // })
+          // var dbBody = {}
+          // if(isHaveRemain){
+          //     dbBody.count = +isHaveRemain.count + (+body.putin_num)
+          //     dbBody.total = +isHaveRemain.total + (+body.putin_num * +body.putin_price)
+          //     yield M.remain.update({ _id: isHaveRemain._id },dbBody)
+          //  }else{
+          //     dbBody.goods_id = body.putin_goods_id
+          //     dbBody.goods_name = body.putin_goods_name
+          //     dbBody.goods_spec = body.putin_goods_spec
+          //     dbBody.count = body.putin_num
+          //     dbBody.total = body.putin_num * body.putin_price
+          //     yield M.remain.create(dbBody)
+          //  }
            F.renderSuccessJson( res, req, "操作成功",resBody);
     }
 
@@ -143,9 +161,9 @@ module.exports = PutinController = {
           "putin_price" : "12",
           "putin_num" : "12",
           "putin_goods_unit" : "个",
-          "putin_goods_spec" : "1*16",
-          "putin_goods_id" : "123",
-          "putin_goods_name" : "巧克力",
+          "putin_goods_spec" : "16*16",
+          "putin_goods_id" : "11",
+          "putin_goods_name" : "芒果",
         })
      }
 
