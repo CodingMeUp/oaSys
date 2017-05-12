@@ -13,6 +13,89 @@ var co = require('co'),
 module.exports = HouseController = {
 
   /**
+   * cangku 库存列表
+   * @route('houseremain', 'GET')
+   * @param req
+   * @param res
+   * @constructor
+   */
+  HOUSEREMAIN_LIST: function (req, res) {
+    co(function* () {
+      var $count  = req.query.$count || true
+      var $offset = req.query.$offset || 0;
+      var $limit = req.query.$limit || 0;
+      var $filter = req.query.$filter || '';
+      var condition = {}
+      if($filter){
+        condition['$match'] = [{ '$or': [{ 'goods_name': new RegExp($filter, "i") }, { 'goods_id': $filter }] }];
+      }
+
+      var goods = yield M.goods.find()
+      var newItems  = []
+     var houses = yield M.house.find()
+      for(var i = 0 ; i < goods.length; i++){
+
+           var putinItem  =  yield M.putin.aggregate([
+              { $match : { putin_goods_id : goods[i].goods_id } },
+              { $group : {_id : "$putin_house_id", num_tutorial : {$sum : '$putin_num'} } }
+            ])
+            var putoutItem  =  yield M.putout.aggregate([
+              { $match : { putout_goods_id : goods[i].goods_id } },
+              { $group : {_id : "$putout_house_id", num_tutorial : {$sum : '$putout_num'} } }
+            ])
+
+            var newObj = {}
+            if(putinItem && putinItem.length >= 0){
+              for(var pin of putinItem){
+                     newObj[pin._id] = pin.num_tutorial
+                }
+            }
+
+            if(putoutItem && putoutItem.length >= 0){
+              for(var pout of putoutItem){
+                  if( newObj[pout._id] ){
+                        newObj[pout._id] -= pout.num_tutorial
+                  }else{
+                        newObj[pout._id]  = (-pout.num_tutorial)
+                  }
+              }
+            }
+
+            var houseObj ={}
+            for(var  j = 0 ; j < houses.length  ; j++){
+                 for(var id  in newObj ){
+                      if(   id  ==  houses[j].house_id ){
+                          houseObj[houses[j].house_id + '__' + houses[j].house_name] = newObj[id]
+                          break
+                      }else{
+                          houseObj[houses[j].house_id + '__' + houses[j].house_name]  = 0
+                      }
+                }
+            }
+
+            var pushObj = Object.assign({}, houseObj , goods[i]._doc)
+            if( (Object.prototype.isPrototypeOf(houseObj) && Object.keys(houseObj).length == 0)  ){
+
+            }else{
+                  newItems.push(pushObj)
+            }
+
+      }
+
+     var resObj = {}
+     resObj.count = newItems.length;
+     resObj.items = newItems
+     resObj.allHouse = houses
+     if(resObj){
+              F.renderSuccessJson( res, req, "获取成功",resObj);
+        }else{
+              F.renderErrorJson( res, req, "获取失败！请确认参数");
+        }
+
+    }).catch(F.handleErr.bind(null, res))
+  },
+
+  /**
    * 仓库列表
    * @route('list', 'GET')
    * @param req
