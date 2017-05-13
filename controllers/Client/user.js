@@ -178,28 +178,28 @@ module.exports = UserController = {
 
      }).catch(F.handleErr.bind(null, res))
    },
-  // /**
-  //  * 批量添加测试数据
-  //  * @route('testAdd', 'get')
-  //  * @param req
-  //  * @param res
-  //  * @constructor
-  //  */
-  // USER_TESTADD: function (req, res) {
-  //   co(function* () {
-  //     for (var i = 0; i < 1000; i++) {
-  //       var userInfo = yield M.user.create({
-  //         user_id: i + '',
-  //         password:  i + '',
-  //         user_name:  '测试名字' + i,
-  //       })
-  //       var userRoleInfo = yield M.user_role.create({
-  //         user_id: i + '',
-  //         role_id: parseInt(Math.random()*4 +1)
-  //       })
-  //    }
-  //
-  //     F.renderErrorJson( res, req, "登录失败！请确认用户名和密码");
-  //   }).catch(F.handleErr.bind(null, res))
-  // },
+  /**
+   * 批量添加测试数据
+   * @route('testAdd', 'get')
+   * @param req
+   * @param res
+   * @constructor
+   */
+  USER_TESTADD: function (req, res) {
+    co(function* () {
+      for (var i = 0; i < 1000; i++) {
+        var userInfo = yield M.user.create({
+          user_id: i + '',
+          password:  i + '',
+          user_name:  '测试名字' + i,
+        })
+        var userRoleInfo = yield M.user_role.create({
+          user_id: i + '',
+          role_id: parseInt(Math.random()*3 +1)
+        })
+     }
+
+      F.renderErrorJson( res, req, "登录失败！请确认用户名和密码");
+    }).catch(F.handleErr.bind(null, res))
+  },
 };

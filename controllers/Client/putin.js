@@ -30,7 +30,7 @@ module.exports = PutinController = {
         condition['$and'] = [{ '$or': [{ 'putin_goods_name': new RegExp($filter, "i") }, { 'putin_goods_id': $filter }] }];
       }
       var count = yield M.putin.count(condition);
-      var items =  yield M.putin.find(condition, null , {limit: +$limit,skip: +$offset})
+      var items =  yield M.putin.find(condition, null , {limit: +$limit,skip: +$offset}).sort({ createDate: -1 })
       var newItems  = []
       if(items && items.length >= 0){
         for(var item of items){

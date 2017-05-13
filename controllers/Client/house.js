@@ -27,10 +27,10 @@ module.exports = HouseController = {
       var $filter = req.query.$filter || '';
       var condition = {}
       if($filter){
-        condition['$match'] = [{ '$or': [{ 'goods_name': new RegExp($filter, "i") }, { 'goods_id': $filter }] }];
+        condition['$and'] = [{ '$or': [{ 'goods_name': new RegExp($filter, "i") }, { 'goods_id': $filter }] }];
       }
 
-      var goods = yield M.goods.find()
+      var goods = yield M.goods.find(condition)
       var newItems  = []
      var houses = yield M.house.find()
       for(var i = 0 ; i < goods.length; i++){

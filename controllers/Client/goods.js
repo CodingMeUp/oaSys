@@ -25,17 +25,19 @@ module.exports = GoodsController = {
       var $offset = req.query.$offset || 0;
       var $limit = req.query.$limit || 0;
       var $filter = req.query.$filter || '';
-      var condition = {}
+      var conditionIn = {}
+      var conditionOut = {}
       if($filter){
-        condition['$match'] = [{ '$or': [{ 'goods_name': new RegExp($filter, "i") }, { 'goods_id': $filter }] }];
+        conditionIn['$and'] = [{ '$or': [{ 'putin_goods_name': new RegExp($filter, "i") }, { 'putin_goods_id': $filter }] }];
+        conditionOut['$and'] = [{ '$or': [{ 'putout_goods_name': new RegExp($filter, "i") }, { 'putout_goods_id': $filter }] }];
       }
 
       var putinItem  =  yield M.putin.aggregate([
-        // { $match : [{ '$or': [{ 'putin_goods_name': new RegExp($filter, "i") }, { 'putin_goods_id': $filter }] }] },
+        { $match : conditionIn },
         { $group : {_id : "$putin_goods_id", num_tutorial : {$sum : '$putin_num'} } }
       ])
       var putoutItem  =  yield M.putout.aggregate([
-        // { $match : [{ '$or': [{ 'putout_goods_name': new RegExp($filter, "i") }, { 'putout_goods_id': $filter }] }] },
+        { $match : conditionOut },
         { $group : {_id : "$putout_goods_id", num_tutorial : {$sum : '$putout_num'} } }
       ])
 

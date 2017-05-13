@@ -30,7 +30,7 @@ module.exports = PutoutController = {
         condition['$and'] = [{ '$or': [{ 'putout_goods_name': new RegExp($filter, "i") }, { 'putout_goods_id': $filter }] }];
       }
       var count = yield M.putout.count(condition);
-      var items =  yield M.putout.find(condition, null , {limit: +$limit,skip: +$offset})
+      var items =  yield M.putout.find(condition, null , {limit: +$limit,skip: +$offset}).sort({ createDate: -1 })
       var newItems  = []
       if(items && items.length >= 0){
         for(var item of items){
