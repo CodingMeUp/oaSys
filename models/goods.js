@@ -22,6 +22,10 @@ var     GoodsSchema = new Schema({
         type: String,
         'default': ''
     },
+      goods_line: {
+        type: String,
+        'default': ''
+    },
     createDate: {
         type: Date,
         'default': Date.now
