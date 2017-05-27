@@ -27,7 +27,12 @@ module.exports = ApplyController = {
       var $filter = req.query.$filter || '';
       var condition = {}
       if($filter){
-        condition['$and'] = [{ '$or': [{ 'orders_name': new RegExp($filter, "i") }, { 'orders_id': $filter }] }];
+        condition['$and'] = [{
+         '$or': [{ 'orders_name': new RegExp($filter, "i") }, { 'orders_id': $filter }]
+       }];
+      }
+      if(req.query.endDate && req.query.startDate && req.query.endDate.indexOf('null') == -1  &&  req.query.startDate.indexOf('null')  ==  -1){
+        condition.createDate  = { "$gte": req.query.startDate, "$lt": req.query.endDate }
       }
       var count = yield M.orders.count(condition);
       var items =  yield M.orders.find(condition,'-_id', {limit: +$limit,skip: +$offset})

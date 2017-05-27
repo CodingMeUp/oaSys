@@ -29,6 +29,9 @@ module.exports = ApplyController = {
       if($filter){
         condition['$and'] = [{ '$or': [{ 'purchase_name': new RegExp($filter, "i") }, { 'purchase_id': $filter }] }];
       }
+      if(req.query.endDate && req.query.startDate && req.query.endDate.indexOf('null') == -1  &&  req.query.startDate.indexOf('null')  ==  -1){
+        condition.createDate  = { "$gte": req.query.startDate, "$lt": req.query.endDate }
+      }
       var count = yield M.purchase.count(condition);
       var items =  yield M.purchase.find(condition,'-_id', {limit: +$limit,skip: +$offset})
       var newItems  = []
