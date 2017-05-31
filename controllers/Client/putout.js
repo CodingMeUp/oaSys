@@ -14,6 +14,50 @@ module.exports = PutoutController = {
 
   /**
    * 出库列表
+   * @route('day', 'GET')
+   * @param req
+   * @param res
+   * @constructor
+   */
+  PUTOUT_DAY: function (req, res) {
+    co(function* () {
+      var body =  req.query
+      var resArr = []
+      var goods_id   = body.goods_id
+      var date   = body.date
+      if(goods_id && goods_id  >  0  && date && date > 0){
+          resArr = yield M.putout.aggregate(
+             [
+               {
+                 $project:
+                   {
+                     year: { $year: "$createDate" },
+                     month: { $month: "$createDate" },
+                     day: { $dayOfMonth: "$createDate" },
+                     hour: { $hour: "$createDate" },
+                     minutes: { $minute: "$createDate" },
+                     seconds: { $second: "$createDate" },
+                     milliseconds: { $millisecond: "$createDate" },
+                     dayOfYear: { $dayOfYear: "$createDate" },
+                     dayOfWeek: { $dayOfWeek: "$createDate" },
+                     week: { $week: "$createDate" },
+                     putout_num:"$putout_num",
+                     putout_goods_id:"$putout_goods_id"
+                   }
+               },
+               { $match: { putout_goods_id: goods_id + '', month: +date } },
+               { $group : {_id : "$day", num_tutorial : {$sum : '$putout_num'} } },
+             ]
+          )
+      }
+
+    F.renderSuccessJson( res, req, "获取成功",resArr);
+
+    }).catch(F.handleErr.bind(null, res))
+  },
+
+  /**
+   * 出库列表
    * @route('list', 'GET')
    * @param req
    * @param res
