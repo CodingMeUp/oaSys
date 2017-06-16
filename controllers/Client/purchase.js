@@ -14,7 +14,7 @@ module.exports = ApplyController = {
 
   /**
    * 采购列表
-   * @route('list', 'GET')
+   * @route('purchase, 'GET')
    * @param req
    * @param res
    * @constructor
